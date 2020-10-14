@@ -26,6 +26,14 @@ jobs:
     - run: npm install
     - run: npm run build 
     #- run: npm test
+    - name: build and push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        image: omwalid/the2app_front
+        dockerfile: ./client/Dockerfile 
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
   
   build_back:
     
@@ -41,3 +49,11 @@ jobs:
       with:
         node-version: 10.x
     - run: npm install
+    - name: build and push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        image: omwalid/the2app_back
+        dockerfile: ./server/Dockerfile 
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
