@@ -1,0 +1,15 @@
+version: "3"
+services:
+  the2app_front:
+    depends_on:
+    - the2app_back
+    image: the2app_react_front:v1.0
+    container_name: the2app_front
+    ports:
+    - 8080:80
+  
+  the2app_back:
+    image: the2app_expressjs_api:v1.0
+    container_name: the2app_back
+    ports:
+    - 5000:5000
